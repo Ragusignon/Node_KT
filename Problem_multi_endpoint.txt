@@ -1,0 +1,15 @@
+request : http://localhost:8080/api/parsetime?iso=2020-08-10T12:10:15.474Z
+
+response : 
+{
+    "hour" : 5,
+    "minutes" : 45,
+    "seconds" : 45
+}
+
+request : http://localhost:8080/api/unixtime?iso=2020-08-10T12:10:15.474Z
+
+response : 
+{
+    time : 321546897
+}
