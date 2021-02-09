@@ -13,11 +13,11 @@ app.get('/api/parsetime', RequestProcessing, LogicalExecution, DBValidation, rep
 
 app.get('/api/unixtime', RequestProcessingunixtime, LogicalExecutionunixtime, DBValidationunixtime, reponsegeneratorunixtime);
 
-app.get('/api/1', RequestProcessing1, LogicalExecution1, DBValidation1, reponsegenerator1)
+app.get('/api/1', RequestProcessing1, LogicalExecution1, DBValidation1, reponsegenerator1, areponsegenerator1)
 
 app.get('/api/2', RequestProcessing2, LogicalExecution2, DBValidation2, reponsegenerator2)
 
-app.get('/api/3', RequestProcessing3, LogicalExecution3, DBValidation3, reponsegenerator3)
+app.get('/api/3', RequestProcessing3, LogicalExecution3)
 
 app.use(Logging);
 
