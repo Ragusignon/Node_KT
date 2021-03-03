@@ -1,0 +1,165 @@
+Requirements & endpoints:
+-------------------------
+
+1. Should able to create/add new user/employee/customer --> /user/addUser
+    Endpoint : http://shoppingapp.com/user/addUser
+    Request Method : POST
+    Request Structure  : {
+        <User_object>
+    }
+    Response Structure: {
+        status : boolean -- values - true/false,
+        error_message : string, --values -DB down/username already existed/etc.
+    }
+
+2. Should able to Update/Delete user/employee/customer details --> /user/modifyUser
+    Endpoint : http://shoppingapp.com/user/modifyUser
+    Request Method : POST
+    Request Structure: {
+        user_id : int,
+        <User_object>
+    }
+    Response Structure :{
+        status : boolean,
+        error_message : string,
+        data : <User_object>
+    }
+3. Should able to add new roles based on our business requirement --> /user/roles/addRoles
+    Endpoint : http://shoppingapp.com/user/roles/addRoles
+    Request Method : POST
+    Request Structure: {
+        role_name : string required,
+        role_descriptions : string required
+    }
+    Response Structure :{
+        status : boolean,
+        error_message : string
+    }
+4. Should able to validate the user credentails --> /user/validateUser
+    Endpoint : http://shoppingapp.com/user/validateUser
+    Request Method : POST
+    Request Structure: {
+        user_name : string,
+        password : string
+    }
+    Response Structure :{
+        status : boolean,
+        error_message : string,
+        data : <User_object>
+    }
+5. Should able to reset user credentails -->/user/resetPassword
+    Endpoint : http://shoppingapp.com/user/resetPassword
+    Request Method : POST
+    Request Structure: {
+        user_name : string,
+        new_password : string
+    }
+    Response Structure :{
+        status : boolean,
+        error_message : string
+    }
+6. Should able to add list new product details -->/product/addProduct
+    Endpoint : http://shoppingapp.com/product/addProduct
+    Request Method : POST
+    Request Structure: {
+        <product_object>
+    }
+    Response Structure :{
+        status : boolean,
+        error_message : string
+    }
+7. Should able to update/delete product details --> /product/modifyProduct
+    Endpoint : http://shoppingapp.com/product/modifyProduct
+    Request Method : POST
+    Request Structure: {
+        <product_object>,
+        deleteProduct: boolean
+    }
+    Response Structure :{
+        status : boolean,
+        error_message : string
+        data: <product_object>
+    }
+8. Should able to add list inventory for product details --> /product/inventory/addInventory
+    Endpoint : http://shoppingapp.com/product/inventory/addInventory
+    Request Method : POST
+    Request Structure: {
+        product_detail_id: int required,
+        count : int required,
+        user_id: int required
+    }
+    Response Structure :{
+        status : boolean,
+        error_message : string
+    }
+9. Should able to add customer review for each product -->/product/review/addReview
+    Endpoint : http://shoppingapp.com/product/review/addReview
+    Request Method : POST
+    Request Structure: {
+        product_detail_id: int required,
+        review_count : int required,
+        review_comments: string,
+        user_id: int required
+    }
+    Response Structure :{
+        status : boolean,
+        error_message : string
+    }
+10. Should able to read customer review for each of product -->/product/review/viewReview
+    Endpoint : http://shoppingapp.com/product/review/viewReview/<product_detail_id>
+    Request Method : GET
+    Request Structure: Not needed
+    Response Structure :[
+        {
+            user_id : int,
+            review_count: int,
+            review_comments : string
+        },
+        {
+            user_id : int,
+            review_count: int,
+        },
+        {
+            user_id : int,
+            review_count: int,
+            review_comments : string
+        }
+    ]
+11. Should able to add offers to any products -->/product/offers/addOffers
+12. Should able to create/update/delete categories of the product -->/categories/addCategory
+13. Should able to view product information such as categories, review, inventory for each of the product -->/product/viewProductInfo
+    Endpoint : http://shoppingapp.com/product/viewProductInfo/<product_detail_id>
+    Request Method : GET
+    Request Structure: Not needed
+    Response Structure :{
+        <product_object>
+    }
+14. Should able to add items to user cart --> /user/cart/addProducts
+15. Should able to update/delete product from user cart  --> /user/cart/modifyCart
+16. Should able to create order for each customer --> /user/order/createOrder
+17. should able to update/delete order information for each order --> /user/order/modifyOrder
+18. Should able to get user order information --> /user/order/getOrderInfo
+
+
+Objects Needed:
+---------------
+user : {
+    user_name : string required,
+    gender : string required,
+    phone_number : string required,
+    address : string,
+    password : string required,
+    blood_group : string,
+    date_of_birth : date,
+    user_type : string required,
+    user_id : int
+}
+product : {
+    product_name : string required,
+    product_descriptions: string required,
+    unit_price : int required,
+    brand_name : string,
+    category_id : int required,
+    created_by : int required,
+    product_detail_id: int
+}
