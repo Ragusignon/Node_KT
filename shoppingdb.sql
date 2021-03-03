@@ -192,3 +192,43 @@ foreign key (product_detail_id) references product_details(product_detail_id),
 foreign key (order_id) references order_summary(order_id)
 );
 
+
+
+create table users_multiple_column
+(
+user_id int auto_increment,
+user_type varchar(3),
+year int default 0,
+user_name varchar(30) not null,
+gender varchar(10) not null,
+phone_number varchar(15) not null,
+address varchar(50) not null,
+password varchar(50) not null,
+blood_group varchar(5),
+date_of_birth timestamp,
+date_Of_registration timestamp default  current_timestamp,
+primary key(user_id, user_type, year) 
+); 
+
+
+CREATE TRIGGER year_trigger BEFORE INSERT ON users_multiple_column 
+FOR EACH ROW SET NEW.year = date_format((NOW()), '%y');
+
+insert into users_multiple_column (user_type, user_name, gender, phone_number, address, password, blood_group, date_of_birth) 
+values ('USR', 'Ragu', 'M', '9159355953', '12 SA, Jain Pebble Brooks, Thoraipakkam, Chennai', 'ragu', 'B+', '1991-04-29');
+
+insert into users_multiple_column (user_type, user_name, gender, phone_number, address, password, blood_group, date_of_birth) 
+values ('CUS', 'Riya', 'F', '9159355953', '12 SA, Jain Pebble Brooks, Thoraipakkam, Chennai', 'riya', 'B+', '1991-04-29');
+
+insert into users_multiple_column (user_type, user_name, gender, phone_number, address, password, blood_group, date_of_birth) 
+values ('CUS', 'Arun', 'M', '9159355953', '12 SA, Jain Pebble Brooks, Thoraipakkam, Chennai', 'arun', 'B+', '1991-04-29');
+
+insert into users_multiple_column (user_type, user_name, gender, phone_number, address, password, blood_group, date_of_birth) 
+values ('CUS', 'Akash', 'M', '9159355953', '12 SA, Jain Pebble Brooks, Thoraipakkam, Chennai', 'arun', 'B+', '1991-04-29');
+
+drop trigger year_trigger;
+
+SELECT * FROM shoppingdb.users_multiple_column;
+
+-- CUS216  ->
+select * from users_multiple_column where user_id = '6' and year ='21' and user_type ='CUS'
