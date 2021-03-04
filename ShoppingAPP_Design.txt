@@ -29,7 +29,8 @@ Requirements & endpoints:
     Request Method : POST
     Request Structure: {
         role_name : string required,
-        role_descriptions : string required
+        role_descriptions : string required,
+        user_id : int required
     }
     Response Structure :{
         status : boolean,
@@ -62,7 +63,8 @@ Requirements & endpoints:
     Endpoint : http://shoppingapp.com/product/addProduct
     Request Method : POST
     Request Structure: {
-        <product_object>
+        <product_object>,
+        user_id : int required
     }
     Response Structure :{
         status : boolean,
@@ -73,7 +75,8 @@ Requirements & endpoints:
     Request Method : POST
     Request Structure: {
         <product_object>,
-        deleteProduct: boolean
+        deleteProduct: boolean,
+        user_id int required
     }
     Response Structure :{
         status : boolean,
@@ -126,7 +129,44 @@ Requirements & endpoints:
         }
     ]
 11. Should able to add offers to any products -->/product/offers/addOffers
-12. Should able to create/update/delete categories of the product -->/categories/addCategory
+    Endpoint : http://shoppingapp.com/product/offers/addOffers
+    Request Method : POST
+    Request Structure: {
+        product_detail_id: int required,
+        discount_precentage : int required,
+        expire_date_timestamp: date required,
+        user_id: int required
+    }
+    Response Structure :{
+        status : boolean,
+        error_message : string
+    }
+12. Should able to create categories for product -->/categories/addCategory
+    Endpoint : http://shoppingapp.com/categories/addCategory
+    Request Method : POST
+    Request Structure: {
+        category_name: string required,
+        category_discriptions : string required,
+        user_id: int required
+    }
+    Response Structure :{
+        status : boolean,
+        error_message : string
+    }
+13. Should able to update/delete categories of the product -->/categories/modifyCategory
+    Endpoint : http://shoppingapp.com/categories/modifyCategory
+    Request Method : POST
+    Request Structure: {
+        category_id : int required,
+        category_name: string required,
+        category_discriptions : string required,
+        user_id: int required
+    }
+    Response Structure :{
+        status : boolean,
+        error_message : string,
+        data: <category_object>
+    }
 13. Should able to view product information such as categories, review, inventory for each of the product -->/product/viewProductInfo
     Endpoint : http://shoppingapp.com/product/viewProductInfo/<product_detail_id>
     Request Method : GET
@@ -135,11 +175,218 @@ Requirements & endpoints:
         <product_object>
     }
 14. Should able to add items to user cart --> /user/cart/addProducts
+    Endpoint : http://shoppingapp.com/user/cart/addProduct
+    Request Method : POST
+    Request Structure: {
+        product_detail_id : int required,
+        unit_count : int required,
+        unit_price : int required,
+        user_id: int required
+    }
+    Response Structure :{
+        status : boolean,
+        error_message : string
+    }
 15. Should able to update/delete product from user cart  --> /user/cart/modifyCart
+    Endpoint : http://shoppingapp.com/user/cart/modifyCart
+    Request Method : POST
+    Request Structure: {
+        user_card_id : int required,
+        product_detail_id : int required,
+        unit_count : int required,
+        unit_price : int required,
+        user_id: int required
+    }
+    Response Structure :{
+        status : boolean,
+        error_message : string,
+        data : <cart_object>
+    }
 16. Should able to create order for each customer --> /user/order/createOrder
+    Endpoint : http://shoppingapp.com/user/order/createOrder
+    Request Method : POST
+    Request Structure: {
+        user_id: int required,
+        product_list : [
+            {
+                product_detail_id : int required,
+                unit_price : int required,
+                unit_count : int required,
+            },
+            {
+                product_detail_id : int required,
+                unit_price : int required,
+                unit_count : int required,
+            }
+        ],
+        shipping_address : string,
+        billing_address : string,
+        gift_wrap : boolean,
+        payment_mode : string --Cash on Delivery or Online payment
+    }
+    Response Structure :{
+        status : boolean,
+        error_message : string
+    }
 17. should able to update/delete order information for each order --> /user/order/modifyOrder
+    Endpoint : http://shoppingapp.com/user/order/modifyOrder
+    Request Method : POST
+    Request Structure: {
+        order_id : int required,
+        deleteOrder : boolean,
+        user_id: int required,
+        product_list : [
+            {
+                product_detail_id : int required,
+                unit_price : int required,
+                unit_count : int required,
+            },
+            {
+                product_detail_id : int required,
+                unit_price : int required,
+                unit_count : int required,
+            }
+        ],
+        shipping_address : string,
+        billing_address : string,
+        gift_wrap : boolean,
+        payment_mode : string --Cash on Delivery or Online payment
+    }
+    Response Structure :{
+        status : boolean,
+        error_message : string,
+        data : <order_object>
+    }
 18. Should able to get user order information --> /user/order/getOrderInfo
+    Endpoint : http://shoppingapp.com/user/order/getOrderInfo/order_id
+    Request Method : GET
+    Request Structure: Not Required
+    Response Structure :{
+        <order_object>
+    }
 
+19. Should able to return all historic order info for a user --> /user/order/getAllOrderInfo
+    Endpoint : http://shoppingapp.com/user/order/getAllOrderInfo
+    Request Method : GET
+    Request Structure: Not Required
+    Response Structure :[
+        {
+            <order_object>
+        },
+        {
+            <order_object>
+        },
+        {
+            <order_object>
+        }
+    ]
+
+20. Should able to get All product info based on filter fields
+    Endpoint : http://shoppingapp.com/product/getAllProductInfo
+    Request Method : GET
+    Request Structure: Not needed
+    Response Structure :[
+        {
+            <product_object>
+        },
+        {
+            <product_object>
+        }
+    ]
+
+    Endpoint : http://shoppingapp.com/product/getAllProductInfo?
+        categories=electronics&sortField=price&sortOrder=desc
+    Request Method : GET
+    Request Structure: Not needed
+    Response Structure :[
+        {
+            <product_object>
+        },
+        {
+            <product_object>
+        }
+    ]
+
+    ==>Backend endpoint --q1= key :categories value : electronics 
+    --q2 key:searchfield value : price
+    --q3 key:sortOrder value : desc
+    Map<key, values> queryMap = new HashMap<Key, values>()
+    queryMap.add(categories, electronics);
+    queryMap.add(brand_name, sony);
+    queryMap.add(sortField, price);
+    queryMap.add(sortOrder, desc);
+    var sql = "select * from products where "; //select * from products where categories = electronics and brand_name = sony
+    queryMap.forEach((key, values) => {
+        if(isProductAttributes(key)){
+            sql = sql + key +" = " + values + " and ";
+        }
+        if(key === 'sortField'){
+            if(queryMap.includes('sortOrder))
+            {
+                sql = sql + values + " = " + newMap.values;
+            }
+            
+        }
+        if(key === 'priceAbove')
+        {
+            sql = sql + key + " < " + values;
+        }
+        if(key === 'priceBelow')
+        {
+            sql = sql + key + " > " + values;
+        }
+    })
+
+    isProductAttributes(key) {
+        if(key is product attributes){
+            return true;
+        }
+        return false
+    }
+    select * from products where q1.key = q1.values and unit_price < 1000;
+
+    Endpoint : http://shoppingapp.com/product/getAllProductInfo?
+        brand_name=sony&priceBelow=1000
+    Request Method : GET
+    Request Structure: Not needed
+    Response Structure :[
+        {
+            <product_object>
+        },
+        {
+            <product_object>
+        }
+    ]
+
+    ==>Backend endpoint --q1= key :brand_name value : sony 
+    --q2 key:priceBelow value : 1000
+    select * from products where q1.key = q1.values and unit_price < 1000;
+
+    Endpoint : http://shoppingapp.com/product/getAllProductInfo?
+        sortField=brand_name&sortOrder=desc
+    Request Method : GET
+    Request Structure: Not needed
+    Response Structure :[
+        {
+            <product_object>
+        },
+        {
+            <product_object>
+        }
+    ]
+
+21. Should able to search product based on user input -- user/productSearch
+    Endpoint : http://shoppingapp.com/user/productSearch?search=sony
+    Request Method : GET
+    Request Structure: Not needed
+    Response Structure :[
+        {
+            <product_object>
+        },
+        {
+            <product_object>
+        }
+    ]
 
 Objects Needed:
 ---------------
