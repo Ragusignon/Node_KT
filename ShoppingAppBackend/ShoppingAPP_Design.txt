@@ -1,6 +1,15 @@
 Requirements & endpoints:
 -------------------------
-
+1. Should able to get all Users details available in db
+    Endpoint : http://shoppingapp.com/user/getAllUser
+    Request Method : GET
+    Request Structure  : Not needed
+    Response Structure: [
+        {
+            user_objects
+        }
+    ]
+    
 1. Should able to create/add new user/employee/customer --> /user/addUser
     Endpoint : http://shoppingapp.com/user/addUser
     Request Method : POST
