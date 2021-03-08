@@ -23,18 +23,18 @@ exports.addUser = (req, res) => {
     }
 
     //create user
-    const user = {
-        user_name : req.body.user_name,
-        gender : req.body.gender,
-        phone_number : req.body.phone_number,
-        address : req.body.address,
-        password : req.body.password,
-        blood_group : req.body.blood_group,
-        date_of_birth : req.body.date_of_birth || Date.now(),
-        date_Of_registration : Date.now()
-    }
+    // const user = {
+    //     user_name : req.body.user_name,
+    //     gender : req.body.gender,
+    //     phone_number : req.body.phone_number,
+    //     address : req.body.address,
+    //     password : req.body.password,
+    //     blood_group : req.body.blood_group,
+    //     date_of_birth : req.body.date_of_birth || Date.now(),
+    //     date_Of_registration : Date.now()
+    // }
 
-    Users.create(user).then(result => {
+    Users.create(req.body).then(result => {
         res.send({
             status : true,
             message : "Users inserted Successfully",
