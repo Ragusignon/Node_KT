@@ -1,6 +1,6 @@
 Requirements & endpoints:
 -------------------------
-1. Should able to get all Users details available in db
+1. Should able to get all Users details available in db --completed
     Endpoint : http://shoppingapp.com/user/getAllUser
     Request Method : GET
     Request Structure  : Not needed
@@ -10,7 +10,7 @@ Requirements & endpoints:
         }
     ]
     
-1. Should able to create/add new user/employee/customer --> /user/addUser
+1. Should able to create/add new user/employee/customer --> /user/addUser --completed
     Endpoint : http://shoppingapp.com/user/addUser
     Request Method : POST
     Request Structure  : {
@@ -21,7 +21,7 @@ Requirements & endpoints:
         message : string, --values -DB down/username already existed/etc.
     }
 
-2. Should able to Update/Delete user/employee/customer details --> /user/modifyUser
+2. Should able to Update/Delete user/employee/customer details --> /user/modifyUser --completed
     Endpoint : http://shoppingapp.com/user/modifyUser/<user_id>
     Request Method : POST
     Request Structure: {
@@ -32,7 +32,7 @@ Requirements & endpoints:
         message : string,
         data : <User_object>
     }
-3. Should able to Delete user/employee/customer details --> /user/deleteUser
+3. Should able to Delete user/employee/customer details --> /user/deleteUser --completed
     Endpoint : http://shoppingapp.com/user/deleteUser/<user_id>
     Request Method : GET
     Request Structure: Not required
@@ -41,7 +41,7 @@ Requirements & endpoints:
         message : string
     }
 4. Should able to add new roles based on our business requirement --> /user/roles/addRoles
-    Endpoint : http://shoppingapp.com/user/roles/addRoles
+    Endpoint : http://shoppingapp.com/user/roles/createRoles
     Request Method : POST
     Request Structure: {
         role_name : string required,
@@ -52,7 +52,18 @@ Requirements & endpoints:
         status : boolean,
         message : string
     }
-5. Should able to validate the user credentails --> /user/validateUser
+4. Should able to add new roles based on our business requirement --> /user/roles/addRoles --completed
+    Endpoint : http://shoppingapp.com/user/roles/addUserRole
+    Request Method : POST
+    Request Structure: {
+        role_id : int required,
+        user_id : int required
+    }
+    Response Structure :{
+        status : boolean,
+        message : string
+    }
+5. Should able to validate the user credentails --> /user/validateUser --completed
     Endpoint : http://shoppingapp.com/user/validateUser
     Request Method : POST
     Request Structure: {
@@ -426,3 +437,18 @@ product : {
     created_by : int required,
     product_detail_id: int
 }
+
+
+Password Reset:
+
+1. Enter your username --> submit
+2. Backend --> validate username available --> 
+    if yes --> generator a OTP 
+    --> store in DB & send OTP code back to user . Meanwhile, we redirect user to OTP submission 
+
+    Backend : validate user . If yes, you have to generator random 6 digit code. then make twilio SMS REST call (request body : messaage : <>)
+    --> send sms to user phone number 
+3. User will collect OTP and fill in text box and submit Request
+4. Backend --> username & OTP will be received ---> we have to validate OTP --> if yes, then redirect user to password reset discount_precentage
+5. User has to fill in password & confirm_password field and submit the Request
+6. Backend --> Update the user password in DB

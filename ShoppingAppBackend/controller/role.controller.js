@@ -1,5 +1,6 @@
 const db = require('../models/index.js');
 const Roles = db.Roles;
+const Users_Role = db.Users_Role;
 
 exports.getAllRole = (req, res) => {
 
@@ -51,6 +52,27 @@ exports.createRole = (req, res) => {
         res.status(500).send({
             status : false,
             message : error.message || 'Something went wrong with Roles data'
+        })
+    })
+}
+
+exports.addRoleToUser = (req, res) => {
+    if(!req.body.role_id || !req.body.user_id){
+        res.status(400).send({
+            status : false,
+            message : 'Required info not available in request body'
+        })
+    }
+
+    Users_Role.create(req.body).then(data => {
+        res.send({
+            status : true,
+            message : 'User Role mapping successful'
+        })
+    }).catch (error => {
+        res.status(500).send({
+            status : false,
+            message : error.message || 'Something went wrong with Add Role'
         })
     })
 }

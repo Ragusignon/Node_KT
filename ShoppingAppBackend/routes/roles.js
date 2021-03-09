@@ -11,4 +11,6 @@ router.get('/getAllRole', role.getAllRole);
 
 router.post('/createRole', role.createRole);
 
+router.post('/addUserRole', role.addRoleToUser);
+
 module.exports = router;

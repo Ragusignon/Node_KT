@@ -15,7 +15,8 @@ const sequelizeConnect = new Sequelize(
             acquire : dbConfig.pool.acquire
         },
         define : {
-            timestamps : false
+            timestamps : false,
+            freezeTableName: true
         }
     }
 )
@@ -28,6 +29,8 @@ db.Sequelize = Sequelize;
 db.Users = require('./users.models.js')(sequelizeConnect, Sequelize);
 
 db.Roles = require('./roles.models.js')(sequelizeConnect, Sequelize);
+
+db.Users_Role = require('./users_role.models.js')(sequelizeConnect, Sequelize);
 
 module.exports = db;
 
