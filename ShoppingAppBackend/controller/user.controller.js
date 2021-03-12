@@ -132,3 +132,74 @@ exports.validateUser = (req, res) => {
         })
     });
 }
+
+// exports.searchUsers = (req, res) => {
+//     console.log('Req.Query:' + JSON.stringify(req.query));
+//     const defaultSearch = ['sort_col', 'sort_type', 'page', 'rec_limit'];
+//     const sort_col = req.query.sort_col || 'date_Of_registration';
+//     const sort_type = req.query.sort_type || 'DESC';
+//     const page = parseInt(req.query.page) || 1;
+//     const rec_limit = parseInt(req.query.rec_limit) || 10;
+
+//     let searchQuery = {};
+
+//     for(var attribute in req.query){
+//         console.log(attribute);
+//         if(req.query.hasOwnProperty(attribute) && !defaultSearch.includes(attribute)){
+//             searchQuery[attribute] = {
+//                 [db.Sequelize.Op.like] : '%' + req.query[attribute] +'%'
+//             }
+//         }
+//     }
+
+//     console.log('searchQuery:' + JSON.stringify(searchQuery));
+//     Users.findAll({
+//         where : searchQuery,
+//         order : [
+//             [sort_col, sort_type]
+//         ],
+//         limit : rec_limit,
+//         offset : ((page - 1) * rec_limit)
+//     }).then(data => {
+//         res.send(data);
+//     }).catch(error => {
+//         res.status(500).send({
+//            status : true,
+//            message : error.message || 'Something went wrong to search products' 
+//         });
+//     })
+// }
+
+exports.searchUsers = (req, res) =>{
+    console.log(JSON.stringify(req.query));
+    let defaultAttributes = [ 'sort_col', 'sort_type', 'limit', 'page'];
+    const sort_col = req.query.sort_col || 'date_of_registration' ;
+    const sort_type = req.query.sort_type  || 'desc';
+    const limit = parseInt(req.query.limit) || 10;
+    const page = parseInt(req.query.page) || 1;
+
+    let searchQuery = {};
+
+    for(var attributes in req.query){
+        if(req.query.hasOwnProperty(attributes) && !defaultAttributes.includes(attributes)){
+            searchQuery[attributes] = req.query[attributes];
+        }
+    }
+    console.log("searchQuery: "+ JSON.stringify(searchQuery));
+
+    Users.findAll({
+        where : searchQuery,
+        order : [
+            [ sort_col , sort_type]
+        ],
+        limit : limit,
+        offset : (page -1) * limit
+    }).then(data => {
+        res.send(data)
+    }).catch(error => {
+        res.status(500).send({
+            status : false,
+            message : error.message || 'Something went wrong with search user'
+        })
+    })
+}

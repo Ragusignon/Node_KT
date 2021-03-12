@@ -21,4 +21,6 @@ router.get('/deleteUser/:user_id', user.deleteUser);
 
 router.post('/validateUser', user.validateUser);
 
+router.get('/searchUsers', user.searchUsers);
+
 module.exports = router;

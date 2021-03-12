@@ -33,4 +33,4 @@ module.exports = (sequelizeConnect, Sequelize) => {
         }
     })
     return Products;
-});
+};

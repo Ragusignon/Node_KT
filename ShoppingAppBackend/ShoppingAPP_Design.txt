@@ -452,3 +452,22 @@ Password Reset:
 4. Backend --> username & OTP will be received ---> we have to validate OTP --> if yes, then redirect user to password reset discount_precentage
 5. User has to fill in password & confirm_password field and submit the Request
 6. Backend --> Update the user password in DB
+
+
+no.of.product = 200 (dynamic nature)
+limt --> 20 (fixed) 
+no.ofpage --> 10 (dynamic)
+limt =10 & page =10
+
+
+Filter API : (sorting, filter based attributes)
+-----------------------------------------------
+--> REST Query parameter
+attributes -- e.g. gender=male&user_name=ragu
+sort_col -- e.g. sort_col=data_of_registration
+sort_type -- e.g. sort_type=desc
+limit -- e.g. limit=20
+page -- e.g. page=1 
+
+
+Search API :   like + search logic in frontend
