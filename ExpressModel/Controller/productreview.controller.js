@@ -2,6 +2,7 @@ const db = require('../models/index.js');
 const ProductReview = db.ProductReview;
 
 exports.getAllProudctReview = (req, res) =>{
+    
     ProductReview.findAll().then(data => {
         res.send(data);
     }).catch(error => {

@@ -73,21 +73,3 @@ exports.getProductCategory = (req, res) =>{
     })
 }
 
-// No. of Products in same category -- doubt
-// exports.getCountOfProductFromCategory = (req, res) => {
-
-//     const count = ProductInfo.count({
-//         where : {
-//             CategoryID : {
-//                 [sequelize.Op.gt] : 1
-//             }
-//         }
-//     }).then(data => {
-//         res.send(data);
-//     }).catch(error => {
-//         res.status(500).send({
-//             status : false,
-//             message : error.message || "Error while getting counts of category"
-//         })
-//     })
-// }

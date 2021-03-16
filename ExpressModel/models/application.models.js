@@ -1,43 +1,45 @@
-module.exports = (sequelizeConnect, sequelize) => {
-    const UserInfo = sequelizeConnect.define('UserInfo', {
-        UserID : {
+module.exports = (sequelizeConnect, sequelize)=> {
+    const ApplicationInfo = sequelizeConnect.define('ApplicationInfo', {
+        ApplicationID : {
             type : sequelize.INTEGER,
             primaryKey : true
         },
-        UserName : {
+        FirstName : {
+            type : sequelize.STRING
+        },
+        LastName : {
+            type : sequelize.STRING
+        },
+        Age : {
+            type : sequelize.INTEGER
+        },
+        Gender : {
             type : sequelize.STRING
         },
         Mobile : {
             type : sequelize.BIGINT
         },
-        DateOfBirth : {
-            type : sequelize.DATE
-        },
         Email : {
             type : sequelize.STRING
         },
-        Address : {
+        Addres : {
             type : sequelize.STRING
         },
-        LoginPassword : {
+        ApplicantRole : {
             type : sequelize.STRING
         },
-        BloodGroup : {
+        StartAt : {
             type : sequelize.STRING
         },
-        BloodDonate : {
+        EndAt : {
             type : sequelize.STRING
         },
-        UserRating : {
-            type : sequelize.FLOAT
-        },
-        UpdatedInfo : {
+        SpecializedIn : {
             type : sequelize.STRING
         },
-        OTP : {
+        Experience : {
             type : sequelize.INTEGER
         }
     });
-
-    return UserInfo;
+    return ApplicationInfo;
 }

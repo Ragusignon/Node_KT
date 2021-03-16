@@ -116,3 +116,29 @@ exports.validateUser = (req, res) => {
         })
     });
 }
+
+exports.generateOTP = (req, res) => {
+    const UserID = req.params.UserID;
+    var value = Math.floor(1000 + Math.random() * 9999);
+
+    UserInfo.update({OTP : value}, {
+        where : {UserID : UserID}
+    }).then(num => {
+        if(num == 1){
+            res.send({
+                status : true,
+                message : "OTP generated successfully"
+            })
+        } else{
+            res.send({
+                status : false,
+                messsage : "Cannot generate OTP"
+            })
+        }
+    }).catch(error => {
+        res.status(500).send({
+            status : false,
+            message : error.message || "Something went wrong"
+        })
+    })
+}

@@ -34,5 +34,22 @@ db.OfferInfo = require('./offer.models.js')(sequelizeConnect, sequelize);
 
 db.Category = require('./category.models.js')(sequelizeConnect, sequelize);
 
+db.ProductReview = require('./productreview.models.js')(sequelizeConnect, sequelize);
+
+db.WishList = require('./wish.models.js')(sequelizeConnect, sequelize);
+
+db.OrderInfo = require('./order.models.js')(sequelizeConnect, sequelize);
+
+db.InventoryInfo = require('./inventory.models.js')(sequelizeConnect, sequelize);
+
+db.ApplicationInfo = require('./application.models.js')(sequelizeConnect, sequelize);
+
+db.Cart = require('./cart.models.js')(sequelizeConnect, sequelize);
+
+db.EmployeeInfo = require('./employee.models.js')(sequelizeConnect, sequelize);
+
+db.SalaryInfo = require('./salary.models.js')(sequelizeConnect, sequelize);
+
+db.DeliveryInfo = require('./delivery.models.js')(sequelizeConnect, sequelize);
 
 module.exports =  db;

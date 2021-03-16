@@ -9,7 +9,15 @@ var usersRouter = require('./routes/users');
 var productsRouter = require('./routes/product');
 var offersRouter = require('./routes/offer');
 var categorysRouter = require('./routes/category');
-
+var productreviewsRouter = require('./routes/productreview');
+var wishlistRouter = require('./routes/wishlist');
+var orderRouter = require('./routes/order');
+var inventoryRouter = require('./routes/inventory');
+var applicationRouter = require('./routes/application')
+var cartRouter = require('./routes/cart');
+var employeeRouter = require('./routes/employee');
+var salaryRouter = require('./routes/salary');
+var deliveryRouter = require('./routes/delivery');
 
 var app = express();
 
@@ -28,7 +36,15 @@ app.use('/user', usersRouter);
 app.use('/product', productsRouter);
 app.use('/offer', offersRouter);
 app.use('/category', categorysRouter);
-
+app.use('/productreview', productreviewsRouter);
+app.use('/wishlist', wishlistRouter);
+app.use('/order', orderRouter);
+app.use('/inventory', inventoryRouter);
+app.use('/application', applicationRouter);
+app.use('/cart', cartRouter);
+app.use('/employee', employeeRouter);
+app.use('/salary', salaryRouter);
+app.use('/delivery', deliveryRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

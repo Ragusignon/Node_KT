@@ -1,26 +1,26 @@
-module.exports = (sequelizeConnect, sequelize) => {
-    const UserInfo = sequelizeConnect.define('UserInfo', {
-        UserID : {
+module.exports = (sequelizeConnect, sequelize)=> {
+    const EmployeeInfo = sequelizeConnect.define('EmployeeInfo', {
+        EmployeeID : {
             type : sequelize.INTEGER,
             primaryKey : true
         },
-        UserName : {
+        EmployeeName : {
             type : sequelize.STRING
         },
         Mobile : {
             type : sequelize.BIGINT
         },
-        DateOfBirth : {
-            type : sequelize.DATE
-        },
         Email : {
             type : sequelize.STRING
         },
-        Address : {
+        EmployeeRole : {
             type : sequelize.STRING
         },
-        LoginPassword : {
+        Gender : {
             type : sequelize.STRING
+        },
+        DateOfBirth : {
+            type : sequelize.DATE
         },
         BloodGroup : {
             type : sequelize.STRING
@@ -28,16 +28,21 @@ module.exports = (sequelizeConnect, sequelize) => {
         BloodDonate : {
             type : sequelize.STRING
         },
-        UserRating : {
-            type : sequelize.FLOAT
+        EmployeeRating : {
+            type : sequelize.INTEGER
         },
-        UpdatedInfo : {
+        Address : {
             type : sequelize.STRING
         },
-        OTP : {
+        CreatedBy : {
             type : sequelize.INTEGER
+        },
+        UpdatedBy : {
+            type : sequelize.INTEGER
+        },
+        UpdateInfo : {
+            type : sequelize.STRING
         }
     });
-
-    return UserInfo;
+    return EmployeeInfo;
 }
